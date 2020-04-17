@@ -8,7 +8,7 @@ cask 'nuccdev' do
 
   depends_on cask: 'boinc'
 
-  binary: 'nucc.sh'
+  binary 'nucc.sh'
 
   installer script: {
                       executable: './nucc.sh',
