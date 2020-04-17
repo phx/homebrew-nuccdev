@@ -8,14 +8,21 @@ cask 'nuccdev' do
 
   depends_on cask: 'boinc'
 
+  binary: 'nucc.sh'
+
   installer script: {
-                      executable: './homebrew.sh',
-                      args:       ['none'],
+                      executable: './nucc.sh',
+                      args:       ['--install'],
                       sudo:       false,
                     }
 
+  uninstall quit: [
+                    'edu.berkeley.boinc',
+                    'edu.berkeley.boinc-sshelper'
+                  ]
+
   uninstall script: {
-                      executable: './homebrew.sh',
+                      executable: 'nucc.sh',
                       args:       ['--uninstall'],
                       sudo:       true,
                     }
