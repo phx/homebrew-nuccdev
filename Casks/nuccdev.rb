@@ -14,8 +14,8 @@ cask 'nuccdev' do
                       sudo:       false,
                     }
 
-  uninstall quit: {
+  uninstall quit: [
                     'edu.berkeley.boinc',
                     'edu.berkeley.boinc-sshelper'
-                  }
+                  ]
 end
