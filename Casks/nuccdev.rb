@@ -8,8 +8,6 @@ cask 'nuccdev' do
 
   depends_on cask: 'boinc'
 
-  binary 'nucc.sh'
-
   installer script: {
                       executable: './nucc.sh',
                       args:       ['--install'],
@@ -22,8 +20,9 @@ cask 'nuccdev' do
                   ]
 
   uninstall script: {
-                      executable: 'nucc.sh',
+                      executable: '/Library/Application Support/BOINC Data/nucc.sh',
                       args:       ['--uninstall'],
                       sudo:       true,
                     }
+
 end
