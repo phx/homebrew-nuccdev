@@ -9,13 +9,14 @@ cask 'nuccdev' do
   depends_on cask: 'boinc'
 
   installer script: {
-                      executable: './quickstart.sh',
+                      executable: './homebrew.sh',
                       args:       ['none'],
                       sudo:       false,
                     }
 
-  uninstall quit: [
-                    'edu.berkeley.boinc',
-                    'edu.berkeley.boinc-sshelper'
-                  ]
+  uninstall script: {
+                      executable: './homebrew.sh',
+                      args:       ['--uninstall'],
+                      sudo:       true,
+                    }
 end

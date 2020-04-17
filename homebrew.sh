@@ -1,21 +1,19 @@
 #!/bin/bash
 
+if [[ $1 = '--uninstall' ]]; then
+  ps aux | grep [b]oinc | awk '{print $2}' | xargs kill -9 2>/dev/null
+  exit
+fi
+
 CONFIG_DIR='/Library/Application Support/BOINC Data'
-PROJECT_URL="${PROJECT_URL:-http://boinc.bakerlab.org/rosetta/}"
-WEAK_KEY="${WEAK_KEY:-2108683_fdd846588bee255b50901b8b678d52ec}"
-#BOINC_GUI_RPC_PASSWORD='123'
+PROJECT_URL="${HOMEBREW_PROJECT_URL:-http://boinc.bakerlab.org/rosetta/}"
+WEAK_KEY="${HOMEBREW_WEAK_KEY:-2108683_fdd846588bee255b50901b8b678d52ec}"
+BOINC_GUI_RPC_PASSWORD="${HOMEBREW_BOINC_GUI_RPC_PASSWORD:-'123'}"
 CC_CONFIG='<cc_config>
    <options>
        <allow_remote_gui_rpc>1</allow_remote_gui_rpc>
    </options>
 </cc_config>'
-
-# If password not set by env, prompt to set it:
-if [[ -z $HOMEBREW_BOINC_GUI_RPC_PASSWORD ]]; then
-  echo
-  read -rp 'Please enter a value for the BOINC GUI RPC password: ' HOMEBREW_BOINC_GUI_RPC_PASSWORD
-  echo -e 'This can be changed at any time by changing the value in gui_rpc_auth.cfg\n'
-fi
 
 echo "$HOMEBREW_BOINC_GUI_RPC_PASSWORD" > "${CONFIG_DIR}/gui_rpc_auth.cfg"
 echo "The BOINC GUI RPC password has been set to '${HOMEBREW_BOINC_GUI_RPC_PASSWORD}'."
